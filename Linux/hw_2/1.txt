@@ -1,0 +1,9 @@
+tati@tati-VirtualBox:~$ cd /home/ing/workspace/
+tati@tati-VirtualBox:~/workspace$ cd /media/data/devel/GeekBrains/basic_linux/
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux$ cd lesson2/
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson2$ cd ../../
+tati@tati-VirtualBox:/media/data/devel/GeekBrains$ cd ~
+tati@tati-VirtualBox:~$ cd /usr/local/bin/
+tati@tati-VirtualBox:/usr/local/bin$ cd
+tati@tati-VirtualBox:~$ cd ..
+tati@tati-VirtualBox:/home$
