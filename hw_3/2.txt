@@ -1,0 +1,50 @@
+a) создать группу с использованием утилит и в ручном режиме;
+```bash
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo groupadd customgroup1
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo addgroup  customgroup2
+[sudo] пароль для ing: 
+Добавляется группа «customgroup2» (GID 1002) ...
+Готово.
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ grep customgroup /etc/group
+customgroup1:x:1001:
+customgroup2:x:1002:
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ 
+```
+
+b) попрактиковаться в смене групп у пользователей;
+```bash
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo useradd -g customgroup1 -G sudo -m -s /bin/bash testuser1
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=1001(customgroup1) группы=1001(customgroup1),27(sudo)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo usermod -g users testuser1 
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=100(users) группы=100(users),27(sudo)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo usermod -G users testuser1 
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=100(users) группы=100(users)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$
+```
+
+c) добавить пользователя в группу, не меняя основной;
+```bash
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo usermod -aG customgroup1,customgroup2,sudo,docker testuser1 
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=100(users) группы=100(users),27(sudo),999(docker),1001(customgroup1),1002(customgroup2)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$
+```
+
+d) удалить пользователя из группы.
+```bash
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo deluser testuser1 customgroup2
+Удаляется пользователь «testuser1» из группы «customgroup2» ...
+Готово.
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=100(users) группы=100(users),27(sudo),999(docker),1001(customgroup1)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ sudo deluser testuser1 customgroup1
+Удаляется пользователь «testuser1» из группы «customgroup1» ...
+Готово.
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$ id testuser1 
+uid=1001(testuser1) gid=100(users) группы=100(users),27(sudo),999(docker)
+tati@tati-VirtualBox:/media/data/devel/GeekBrains/basic_linux/lesson3$
+```
+
