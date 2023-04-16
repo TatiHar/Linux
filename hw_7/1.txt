@@ -1,0 +1,18 @@
+1. ѕодключить репозиторий с nginx любым удобным способом, установить nginx и потом удалить nginx, использу€ утилиту dpkg.
+
+tati@tati-VirtualBox:~$ sudo apt-add-repository ppa:nginx/stable
+
+tati@tati-VirtualBox:~$ ls  /etc/apt/sources.list.d
+nginx-ubuntu-stable-focal.list
+tati@tati-VirtualBox:~$ cat /etc/apt/sources.list.d/nginx-ubuntu-stable-focal.list
+deb http://ppa.launchpad.net/nginx/stable/ubuntu focal main
+# deb-src http://ppa.launchpad.net/nginx/stable/ubuntu focal main
+
+tati@tati-VirtualBox:~$ sudo apt install nginx
+
+tati@tati-VirtualBox:~$ sudo dpkg -r nginx
+
+2. ”становить пакет на свой выбор, использу€ snap.
+
+tati@tati-VirtualBox:~$ sudo snap install zipstream
+zipstream 0.17.3 from Anton Maminov (mamantoha) installed
