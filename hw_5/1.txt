@@ -1,0 +1,62 @@
+1. Создать файл file1 и наполнить его произвольным содержимым. 
+    cat > file1
+    Test_message
+Скопировать его в file2. 
+    cat file1 > file2
+Создать символическую ссылку file3 на file1. 
+    ln -s file1 file3
+Создать жесткую ссылку file4 на file1. 
+    ln file1 file4
+Посмотреть, какие айноды у файлов. 
+    ls -i
+    << 301729 file1 301731 file2 262601 file3 301729 file4
+Удалить file1. 
+    rm file1
+Что стало с остальными созданными файлами? 
+    file3 остался, но ссылка перестала существовать
+    file4 остался и указывает на нужный участок диска
+Попробовать вывести их на экран.
+    cat file3
+    << cat: file3 No such file ir directory
+    cat file4
+    << Test_message
+-------------------------------------------------------------
+2. Дать созданным файлам другие, произвольные имена. 
+    mv file2 file2_new
+    mv file3 file3_new
+    mv file4 file4_new
+Создать новую символическую ссылку. 
+    ln -s file2_new file5
+Переместить ссылки в другую директорию.
+    mkdir folder
+    mv file5 folder/
+    cat file5
+    << cat: file5 No such file ir directory
+-------------------------------------------------------------
+3. Создать два произвольных файла. 
+    echo Test > file1_3task
+    echo Test > file2_3task
+    ls -l file1_3task file2_3task
+    << -rw-rw-r-- ... file1_3task
+    << -rw-rw-r-- ... file1_3task
+Первому присвоить права на чтение, запись для владельца и группы, только на чтение — для всех. 
+    chmod u=rw,g=rw,o=r file1_3task
+    ls -l file1_3task
+    << -rw-rw-r-- ... file1_3task
+Второму присвоить права на чтение, запись — только для владельца. 
+    chmod u=rw,g=,o= file2_3task
+    ls -l file2_3task
+    << -rw------- ... file2_3task
+Сделать это в численном и символьном виде.
+    chmod 664 file1_3task
+    chmod 600 file2_3task
+-------------------------------------------------------------
+4. * Создать группу developer и несколько пользователей, входящих в нее. 
+    sudo groupadd developer
+    sudo useradd -m -G developer -s /bin/bash user1
+    sudo useradd -m -G developer -s /bin/bash user2
+Создать директорию для совместной работы. 
+    mkdir developer_dir
+    sudo chgrp developer developer_dir
+Сделать так, чтобы созданные одними пользователями файлы могли изменять другие пользователи этой группы.
+    chmod u=rwx,g=rx,o=rx developer_dir
